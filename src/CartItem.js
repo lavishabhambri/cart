@@ -2,28 +2,6 @@ import { div } from 'prelude-ls';
 import React from 'react';
 
 class CartItem extends React.Component{
-    // Defining state in CartItem
-    constructor () {
-        // Calling the constructor of parent class as we are inheriting from parent class
-        super();
-        this.state = {
-            price : 999,
-            title : 'Phone',
-            qty : 1,
-            img : ''
-        }
-    }
-
-    // Creating the functions
-    // Use arrow functions for binding this
-    increaseQuantity = () => {
-        //using setState to render the code
-        this.setState((prevState) => {
-            return {
-                qty : prevState.qty + 1
-            }
-        });
-    }
 
     decreaseQuantity = () => {
         const { qty } = this.state;
@@ -43,7 +21,7 @@ class CartItem extends React.Component{
 
     render(){
         // Getting the required properties from the above state object
-        const { price, title, qty } = this.state;
+        const { price, title, qty } = this.props.product;
 
         return (
             <div className="cart-item">
@@ -63,13 +41,13 @@ class CartItem extends React.Component{
                             alt="increase" 
                             className="action-icons" 
                             src="https://image.flaticon.com/icons/png/512/992/992651.png"
-                            onClick={this.increaseQuantity}
+                            onClick={ () => this.props.onIncreasingQuantity(this.props.product) }
                         />
                         <img 
                             alt="decrease" 
                             className="action-icons" 
                             src="https://image.flaticon.com/icons/png/512/992/992683.png"
-                            onClick={this.decreaseQuantity}
+                            onClick={ () => this.props.onDecreasingQuantity(this.props.product) }
                         />
                         <img 
                             alt="delete" 
